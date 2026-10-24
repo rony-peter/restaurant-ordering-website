@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { QrCode, Monitor, BarChart3, ShieldCheck, Zap, Smartphone, ArrowUpRight } from "lucide-react";
+import { QrCode, Monitor, BarChart3, ShieldCheck, Zap, Smartphone } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,12 +53,12 @@ export function BentoGrid() {
     <section id="bento" ref={containerRef} className="py-24 bg-slate-950 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="bento-header text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-3">
+          <p className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-3">
             Built For High-Velocity Kitchens
-          </h2>
-          <p className="text-section font-extrabold text-white tracking-tight">
-            Everything your restaurant needs under one unified platform.
           </p>
+          <h2 className="text-section font-extrabold text-white tracking-tight">
+            QR ordering, KDS and analytics in one restaurant platform.
+          </h2>
         </div>
 
         <div className="bento-grid grid grid-cols-1 md:grid-cols-3 gap-6">

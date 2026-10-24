@@ -116,12 +116,12 @@ export function Pricing() {
     <section id="pricing" ref={containerRef} className="py-24 bg-slate-950 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="pricing-header text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-3">
+          <p className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-3">
             Transparent Pricing
-          </h2>
-          <p className="text-section font-extrabold text-white tracking-tight">
-            Flexible plans designed for every stage of growth.
           </p>
+          <h2 className="text-section font-extrabold text-white tracking-tight">
+            Restaurant software plans for every stage of growth.
+          </h2>
 
           <div className="mt-8 inline-flex items-center gap-3 p-1.5 glass-pill rounded-full border border-white/15">
             <button

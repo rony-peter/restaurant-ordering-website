@@ -51,7 +51,7 @@ export function Contact() {
       return;
     }
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+    const accessKey = process.env.WEB3FORMS_KEY;
     if (!accessKey) {
       setErrorMsg("The contact form isn't configured yet. Please try again later.");
       setStatus("error");

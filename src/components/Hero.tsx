@@ -60,7 +60,7 @@ export function Hero() {
         <div className="text-center max-w-4xl mx-auto space-y-6">
           <div className="hero-reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill border border-white/15 text-xs font-semibold text-indigo-300">
             <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-            <span>Next-Gen Restaurant OS & QR Engine</span>
+            <span>QR Ordering & KDS Software for Indian Restaurants</span>
           </div>
 
           <h1 className="hero-reveal text-display font-extrabold text-white tracking-tight">
