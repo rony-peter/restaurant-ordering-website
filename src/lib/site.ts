@@ -1,6 +1,6 @@
 // Single source of truth for site-wide SEO values.
-// Set SITE_URL in .env.local / your hosting dashboard (e.g. https://www.yourdomain.com).
-export const SITE_URL = (process.env.SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+// Set NEXT_PUBLIC_SITE_URL in .env.local / your hosting dashboard (e.g. https://www.yourdomain.com).
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
 export const SITE_NAME = "OpsPortal";
 export const SITE_TITLE = "OpsPortal | QR Ordering, KDS & Restaurant POS Software in India";
 export const SITE_DESCRIPTION =
