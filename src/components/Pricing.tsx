@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Check, Sparkles } from "lucide-react";
+import { selectPlan } from "@/components/Contact";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Prices are in INR per outlet, exclusive of 18% GST.
+// priceAnnual is the effective per-month rate when billed annually (20% off).
+const formatINR = (amount: number) => `₹${amount.toLocaleString("en-IN")}`;
 
 export function Pricing() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,21 +63,24 @@ export function Pricing() {
       description: "Ideal for single-location cafes testing digital QR ordering.",
       features: ["5 Active Tables", "20 Menu Items", "Basic QR Ordering", "1 Staff Account"],
       cta: "Get Started Free",
+      contactPlan: "free",
+      note: "Free forever",
       popular: false,
     },
     {
       name: "BASIC",
-      priceMonthly: 29,
-      priceAnnual: 23,
+      priceMonthly: 499,
+      priceAnnual: 399,
       description: "Perfect for growing bistros needing live Kitchen Display (KDS).",
       features: ["15 Active Tables", "100 Menu Items", "Real-Time KDS Feed", "3 Staff Accounts", "Standard Analytics"],
-      cta: "Start Basic Trial",
+      cta: "Start 14-Day Free Trial",
+      contactPlan: "trial-basic",
       popular: false,
     },
     {
       name: "PRO",
-      priceMonthly: 79,
-      priceAnnual: 63,
+      priceMonthly: 1999,
+      priceAnnual: 1599,
       description: "Our complete suite for busy restaurants scaling operations.",
       features: [
         "Unlimited Tables",
@@ -83,7 +90,8 @@ export function Pricing() {
         "Razorpay & Payment Gateway Integration",
         "Priority 24/7 Support",
       ],
-      cta: "Start Pro Trial",
+      cta: "Start 14-Day Free Trial",
+      contactPlan: "trial-pro",
       popular: true,
     },
     {
@@ -98,6 +106,8 @@ export function Pricing() {
         "Custom SLAs & Onsite Setup",
       ],
       cta: "Contact Sales",
+      contactPlan: "enterprise",
+      note: "Tailored quote",
       popular: false,
     },
   ];
@@ -137,59 +147,88 @@ export function Pricing() {
         </div>
 
         <div className="pricing-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`pricing-card p-8 rounded-3xl flex flex-col justify-between relative transition-all ${
-                plan.popular
-                  ? "glass-panel border-indigo-500/60 shadow-2xl shadow-indigo-500/20 scale-105 z-10"
-                  : "glass-panel hover:border-white/20"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-[11px] font-extrabold rounded-full shadow-md flex items-center gap-1 border border-white/20">
-                  <Sparkles className="w-3 h-3" /> MOST POPULAR
-                </div>
-              )}
+          {plans.map((plan) => {
+            const isPaid =
+              typeof plan.priceMonthly === "number" && plan.priceMonthly > 0;
 
-              <div>
-                <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
-                <p className="text-xs text-slate-400 mb-6 min-h-[36px]">{plan.description}</p>
-
-                <div className="mb-6">
-                  <span className="text-4xl font-extrabold text-white">
-                    {typeof plan.priceMonthly === "number"
-                      ? `$${isAnnual ? plan.priceAnnual : plan.priceMonthly}`
-                      : plan.priceMonthly}
-                  </span>
-                  {typeof plan.priceMonthly === "number" && (
-                    <span className="text-xs text-slate-400"> / month</span>
-                  )}
-                </div>
-
-                <ul className="space-y-3 mb-8 border-t border-white/10 pt-6">
-                  {plan.features.map((feat) => (
-                    <li key={feat} className="flex items-center gap-3 text-xs text-slate-300">
-                      <Check className="w-4 h-4 text-indigo-400 shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <Link
-                href={`/register?plan=${plan.name}`}
-                className={`w-full py-3 text-center text-xs font-bold rounded-full transition-all ${
+            return (
+              <div
+                key={plan.name}
+                className={`pricing-card p-8 rounded-3xl flex flex-col justify-between relative transition-all ${
                   plan.popular
-                    ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/30 border border-white/20"
-                    : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10"
+                    ? "glass-panel border-indigo-500/60 shadow-2xl shadow-indigo-500/20 scale-105 z-10"
+                    : "glass-panel hover:border-white/20"
                 }`}
               >
-                {plan.cta}
-              </Link>
-            </div>
-          ))}
+                {plan.popular && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-[11px] font-extrabold rounded-full shadow-md flex items-center gap-1 border border-white/20">
+                    <Sparkles className="w-3 h-3" /> MOST POPULAR
+                  </div>
+                )}
+
+                <div>
+                  <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
+                  <p className="text-xs text-slate-400 mb-6 min-h-[36px]">{plan.description}</p>
+
+                  <div className="mb-6">
+                    <div>
+                      <span className="text-4xl font-extrabold text-white">
+                        {typeof plan.priceMonthly === "number"
+                          ? formatINR(
+                              (isAnnual ? plan.priceAnnual : plan.priceMonthly) as number
+                            )
+                          : plan.priceMonthly}
+                      </span>
+                      {typeof plan.priceMonthly === "number" && (
+                        <span className="text-xs text-slate-400">
+                          {" "}
+                          / month{isPaid ? " + GST" : ""}
+                        </span>
+                      )}
+                    </div>
+                    {/* Reserved height keeps the cards aligned when toggling billing */}
+                    <p className="text-[11px] text-slate-500 mt-1 min-h-[32px]">
+                      {isPaid
+                        ? `${
+                            isAnnual
+                              ? `Billed ${formatINR((plan.priceAnnual as number) * 12)} per year`
+                              : "Billed monthly"
+                          } after your 14-day free trial`
+                        : plan.note}
+                    </p>
+                  </div>
+
+                  <ul className="space-y-3 mb-8 border-t border-white/10 pt-6">
+                    {plan.features.map((feat) => (
+                      <li key={feat} className="flex items-center gap-3 text-xs text-slate-300">
+                        <Check className="w-4 h-4 text-indigo-400 shrink-0" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <a
+                  href="#contact"
+                  onClick={() => selectPlan(plan.contactPlan)}
+                  className={`w-full py-3 text-center text-xs font-bold rounded-full transition-all ${
+                    plan.popular
+                      ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-500/30 border border-white/20"
+                      : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-white/10"
+                  }`}
+                >
+                  {plan.cta}
+                </a>
+              </div>
+            );
+          })}
         </div>
+
+        <p className="text-center text-[11px] text-slate-500 mt-10 max-w-2xl mx-auto leading-relaxed">
+          Every paid plan starts with a 14-day free trial. We don&rsquo;t collect payments on this
+          website; our team will contact you to set up your subscription before the trial ends.
+          All prices are in INR, per outlet, and exclusive of 18% GST.
+        </p>
       </div>
     </section>
   );

@@ -8,6 +8,14 @@ export function FAQ() {
 
   const faqs = [
     {
+      q: "How does the 14-day free trial work?",
+      a: "Send us your details through the contact form and we'll set up your trial. You can use the plan you chose for 14 days. We don't collect any payment details on this website. Before the trial ends, our team will get in touch to help you pick a plan and start your subscription.",
+    },
+    {
+      q: "What happens after the trial ends?",
+      a: "We'll contact you before the 14 days are up. If you'd like to continue, we'll help you start a subscription. If not, you can move to the Free plan, which has no time limit.",
+    },
+    {
       q: "Do hardware installations require specialized POS devices?",
       a: "No. OpsPortal runs on standard iPads, Android tablets, desktop browsers, or your existing kitchen receipt printers without proprietary hardware lock-in.",
     },
@@ -21,7 +29,7 @@ export function FAQ() {
     },
     {
       q: "Is payment gateway integration included in all plans?",
-      a: "Integrated payment processing (Razorpay, Stripe) is enabled on Pro and Enterprise tiers, allowing diners to pay directly from their phones.",
+      a: "Integrated payment processing through Razorpay is available on the Pro and Enterprise plans, allowing diners to pay directly from their phones.",
     },
   ];
 
@@ -46,11 +54,12 @@ export function FAQ() {
             >
               <button
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                aria-expanded={openIndex === idx}
                 className="w-full px-6 py-5 text-left flex items-center justify-between font-bold text-white text-base hover:text-indigo-400 transition-colors"
               >
                 <span>{faq.q}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-indigo-400 transition-transform duration-300 ${
+                  className={`w-5 h-5 text-indigo-400 shrink-0 transition-transform duration-300 ${
                     openIndex === idx ? "rotate-180" : ""
                   }`}
                 />
@@ -63,6 +72,14 @@ export function FAQ() {
             </div>
           ))}
         </div>
+
+        <p className="text-center text-sm text-slate-400 mt-10">
+          Still have a question?{" "}
+          <a href="#contact" className="text-indigo-400 hover:text-indigo-300 font-semibold transition-colors">
+            Send us a message
+          </a>
+          .
+        </p>
       </div>
     </section>
   );

@@ -10,6 +10,7 @@ const navItems = [
   { name: "Product", href: "/#bento", id: "bento" },
   { name: "Pricing", href: "/#pricing", id: "pricing" },
   { name: "FAQ", href: "/#faq", id: "faq" },
+  { name: "Contact", href: "/#contact", id: "contact" },
 ];
 
 export function Navbar() {
@@ -118,16 +119,10 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Desktop Call to Actions */}
+        {/* Desktop Call to Action */}
         <div className="hidden md:flex items-center gap-4">
           <Link
-            href="/login"
-            className="text-sm font-semibold text-slate-200 hover:text-white transition-colors px-3 py-2"
-          >
-            Sign In
-          </Link>
-          <Link
-            href="/register"
+            href="/#contact"
             className="px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-sm font-semibold rounded-full shadow-lg shadow-indigo-500/30 transition-all flex items-center gap-2 hover:gap-3 border border-white/20"
           >
             <span>Start Free Trial</span>
@@ -140,6 +135,7 @@ export function Navbar() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none"
           aria-label="Toggle Navigation"
+          aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -173,16 +169,11 @@ export function Navbar() {
               );
             })}
           </nav>
-          <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+          <div className="pt-4 border-t border-white/10">
             <Link
-              href="/login"
-              className="w-full text-center py-2 text-sm font-semibold text-slate-200 hover:text-white"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/register"
-              className="w-full text-center py-3 bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-sm font-semibold rounded-full shadow-lg shadow-indigo-500/25 border border-white/20"
+              href="/#contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-center py-3 bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-sm font-semibold rounded-full shadow-lg shadow-indigo-500/25 border border-white/20"
             >
               Start Free Trial
             </Link>

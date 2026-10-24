@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight, Sparkles, CheckCircle2, Clock, Utensils, Play, RefreshCw, Zap } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2, Clock, Play, Zap } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,9 +45,9 @@ export function Hero() {
   }, []);
 
   const mockTickets = [
-    { id: "#1042", table: "Table 04", items: ["2x Wagyu Burger", "1x Truffle Fries", "2x Iced Tea"], status: "Preparing", time: "2m ago", total: "$48.50" },
-    { id: "#1043", table: "Table 12", items: ["1x Margherita Pizza", "1x Caesar Salad"], status: "Ready", time: "1m ago", total: "$32.00" },
-    { id: "#1044", table: "Table 08", items: ["3x Spicy Ramen", "3x Matcha Latte"], status: "New", time: "Just now", total: "$64.00" },
+    { id: "#1042", table: "Table 04", items: ["2x Wagyu Burger", "1x Truffle Fries", "2x Iced Tea"], status: "Preparing", time: "2m ago", total: "₹1,850" },
+    { id: "#1043", table: "Table 12", items: ["1x Margherita Pizza", "1x Caesar Salad"], status: "Ready", time: "1m ago", total: "₹790" },
+    { id: "#1044", table: "Table 08", items: ["3x Spicy Ramen", "3x Matcha Latte"], status: "New", time: "Just now", total: "₹1,240" },
   ];
 
   return (
@@ -76,13 +75,13 @@ export function Hero() {
           </p>
 
           <div className="hero-reveal flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              href="/register"
+            <a
+              href="#contact"
               className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-bold rounded-full shadow-2xl shadow-indigo-500/30 transition-all flex items-center justify-center gap-3 border border-white/20 group"
             >
               <span>Start Free 14-Day Trial</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
             <a
               href="#bento"
               className="w-full sm:w-auto px-8 py-4 glass-panel hover:bg-white/10 text-slate-200 font-semibold rounded-full transition-all flex items-center justify-center gap-2"
@@ -94,7 +93,7 @@ export function Hero() {
 
           <div className="hero-reveal flex flex-wrap items-center justify-center gap-6 pt-6 text-xs text-slate-400 font-medium">
             <span className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" /> No credit card required
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" /> No payment details needed
             </span>
             <span className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" /> 5-minute setup

@@ -19,13 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    // scroll-pt-24 keeps anchor targets from hiding under the fixed navbar
+    <html lang="en" className="dark scroll-smooth scroll-pt-24">
       <body className={`${inter.className} bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white min-h-screen`}>
-  <VantaBackground />
-  <Navbar />
-  <main className="relative min-h-screen pt-24">{children}</main>
-  <Footer />
-</body>
+        <VantaBackground />
+        <Navbar />
+        <main className="relative min-h-screen pt-24">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
